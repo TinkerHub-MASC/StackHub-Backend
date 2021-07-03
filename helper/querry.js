@@ -1,0 +1,1 @@
+db.events.aggregate([{$project:{_id:0,year:{$year:"$date"},hour:{$hour:"$date"},minute:{$minute:"$date"}}},{$addFields:{ff:{$gt:["$year",new Date().getFullYear()]}}}])

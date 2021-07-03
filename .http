@@ -1,0 +1,26 @@
+@url = http://localhost:4000/api/
+GET {{url}}
+
+###
+POST {{url}}/admin/events
+Content-Type: application/json
+
+{
+    "name":"git",
+    "totalSeat":20,
+    "date":"2021-07-03T14:45",
+    "time":"12:00 PM",
+    "resoursePerson":"nizam"
+
+}
+
+###
+POST {{url}}/admin/member
+Content-Type: application/json
+
+{
+    "name":"nizam",
+    "desc":"ggff",
+    "role":"tech lead"
+
+}
