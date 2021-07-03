@@ -14,4 +14,8 @@ router.post("/admin/events",adminController.addingNewEvents)
 //@route /api/admin/member
 router.post("/admin/member",adminController.addingNewMember)
 
+//@desc for updating a member
+//@route /api/admin/member
+router.put("/admin/member",adminController.upadteAMember)
+
 module.exports = router;

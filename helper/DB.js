@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 try {
     mongoose.connect(process.env.DB,{
         useNewUrlParser:true,
+        useFindAndModify:false,
         useUnifiedTopology:true
     },()=>console.log('connected to DB'))
 } catch (error) {

@@ -7,7 +7,7 @@ module.exports = {
     addingNewEvents: async (req, res) => {
         const { name, totalSeat, date, resoursePerson } = req.body;
         if (!name || !totalSeat || !date || !resoursePerson)
-            return res.json("enter all fields");
+            return res.json({error:"enter all fields"});
         try {
             const newEvents = await new Events({
                 name,
@@ -25,7 +25,7 @@ module.exports = {
     addingNewMember: async (req, res) => {
         const { name, role,desc } = req.body;
         if (!name || !role)
-            return res.json("enter all fields");
+            return res.json({error:"enter all fields"});
 
         try {
             const newMember = await new Team({
@@ -40,5 +40,21 @@ module.exports = {
         }
 
 
+    },
+    upadteAMember:async (req,res)=>{
+        const { name, role,desc,_id } = req.body;
+            if(!_id) return res.json({error:"enter all fields"})
+        try {
+         const updatedMember = await Team.findByIdAndUpdate(_id,{
+               name,
+               role,
+               desc
+           })
+           res.json(updatedMember)
+            
+        } catch (err) {
+                res.status(500).json({error:"internal server error"})
+            console.log("error in adding new user",err);
+        }
     }
 }
