@@ -1,32 +1,38 @@
 const mongoose = require("mongoose");
 
 const eventsSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    totalSeat:{
-        type:Number
+    type: {
+        type: String,
+        default: 'offline'
     },
-    date:{
-        type:Date,
-        required:true
+
+    totalSeat: {
+        type: Number,
+        required: true
     },
-    resoursePerson:{
-        type:String,
-        required:true
+    date: {
+        type: Date,
+        required: true
     },
-   meetUrl:{
-        type:String
+    resoursePerson: {
+        type: String,
+        required: true
     },
-    audiance:[
-        {
-            type:String,
-            default:["ggg","hhh"]
-        }
-    ],
-    fee:{
-        type:String
+    meetUrl: {
+        type: String
+    },
+    pic: {
+        type: String
+    },
+    location: {
+        type: String
+    },
+    fee: {
+        type: Number
     }
 })
-module.exports = mongoose.model('events',eventsSchema);
+module.exports = mongoose.model('events', eventsSchema);

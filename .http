@@ -24,3 +24,16 @@ Content-Type: application/json
     "role":"tech lead"
 
 }
+
+
+###
+PUT {{url}}/admin/member
+Content-Type: application/json
+
+{
+    "_id":"60e04423dedb1028e3ff7738",
+    "name":"nizam kp",
+    "desc":"ggff",
+    "role":"tech lead"
+
+}
