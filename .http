@@ -1,6 +1,47 @@
 @url = http://localhost:5000
 
 
+
+###
+DELETE  {{url}}/auth/admin/logout
+Content-Type: application/json
+
+{
+    "refershToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWVkYTAwZGE5NzI4ZDdjMzBjODEiLCJpYXQiOjE2MjY3NzkzNTQsImV4cCI6MTYyOTM3MTM1NCwiaXNzIjoic3RhY2todWJNYXNjIn0.92_HkUJxGr0lllHW372thvrpLEptSUHLPLGEPkXGcu0"
+}
+
+###
+DELETE  {{url}}/auth/user/logout
+Content-Type: application/json
+
+{
+    "refershToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWViYjAwZGE5NzI4ZDdjMzBjN2QiLCJpYXQiOjE2MjY3ODI2NDUsImV4cCI6MTYyOTM3NDY0NSwiaXNzIjoic3RhY2todWJNYXNjIn0.DClNXA_T7KD6IrTKC3XEPc6i82JIAG1_M5axSdKv8Co"
+}
+###
+GET {{url}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWE5YmFiNTc5MTI2ZTc4YmUxZjEiLCJpYXQiOjE2MjY3NzgyNjcsImV4cCI6MTYyNjc4OTA2NywiaXNzIjoic3RhY2todWJNYXNjIn0.FKQKSGyozeGwrqMoD0ZWYset4V8EahtKbn9TrgZ39nE
+
+###
+POST {{url}}/auth/user/login
+Content-Type:application/json
+
+{
+    "name":"nizam",
+    "email":"nizam1",
+    "password":"123"
+}
+
+###
+POST {{url}}/auth/user/register
+Content-Type:application/json
+
+{
+    "name":"nizam",
+    "email":"nizam1",
+    "password":"123"
+}
+
+###
 POST {{url}}/auth/admin/login
 Content-Type:application/json
 
@@ -9,20 +50,28 @@ Content-Type:application/json
     "password":"123"
 }
 ###
-POST {{url}}/admin/auth/refresh
+POST {{url}}/auth/admin/refresh
 Content-Type: application/json
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjIwNzIsImV4cCI6MTYyNjc3Mjg3MiwiaXNzIjoic3RhY2todWJNYXNjIn0.Pj0hiFTwaiqJDV7OwC9O1c7AnHPsevBzlMCJBWjUBkw
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjUyMzIsImV4cCI6MTYyOTM1NzIzMiwiaXNzIjoic3RhY2todWJNYXNjIn0.anX4odfhM6vdSOvVh4qeQq1jnLsx2pl-uDDeP2oxaWA"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3Nzg1MDgsImV4cCI6MTYyOTM3MDUwOCwiaXNzIjoic3RhY2todWJNYXNjIn0.VFvohZYMJaFJdL6Z2U2BpJAdqY2LZdzOXHgw3zUOvlU"
 }
 
 ###
-POST {{url}}/admin/auth/admin/register
+POST {{url}}/auth/user/refresh
 Content-Type: application/json
 
 {
-    "email":"nizam",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWViYjAwZGE5NzI4ZDdjMzBjN2QiLCJpYXQiOjE2MjY3ODA2MjUsImV4cCI6MTYyOTM3MjYyNSwiaXNzIjoic3RhY2todWJNYXNjIn0.hDZ4I-TUOQFTzSnZ8uZBnE_ImnbFOQaF8ucd3ZrvjEA"
+}
+
+
+###
+POST {{url}}/auth/admin/register
+Content-Type: application/json
+
+{
+    "email":"nizam1",
     "password":"123"
     
 }

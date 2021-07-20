@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-const key1 = crypto.randomBytes(64).toString('base64')
+const key1 = crypto.randomBytes(64).toString('latin1')
 
 const key2
 
