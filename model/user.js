@@ -6,15 +6,14 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     email:{
-        type:String
-    },
-    phone:{
-        type:String
-    },
-    career:{
         type:String,
-        default:"Student"
-    }
+        lowercase:true,
+        uniuqe:true
+    },
+  password:{
+      type:String,
+      required:true
+  }
 
 })
 

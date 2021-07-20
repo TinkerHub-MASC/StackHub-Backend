@@ -1,17 +1,81 @@
-@url = http://localhost:4000/api/
-GET {{url}}
+@url = http://localhost:5000
+
+
+POST {{url}}/auth/admin/login
+Content-Type:application/json
+
+{
+    "email":"@nizam",
+    "password":"123"
+}
+###
+POST {{url}}/admin/auth/refresh
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjIwNzIsImV4cCI6MTYyNjc3Mjg3MiwiaXNzIjoic3RhY2todWJNYXNjIn0.Pj0hiFTwaiqJDV7OwC9O1c7AnHPsevBzlMCJBWjUBkw
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjUyMzIsImV4cCI6MTYyOTM1NzIzMiwiaXNzIjoic3RhY2todWJNYXNjIn0.anX4odfhM6vdSOvVh4qeQq1jnLsx2pl-uDDeP2oxaWA"
+}
+
+###
+POST {{url}}/admin/auth/admin/register
+Content-Type: application/json
+
+{
+    "email":"nizam",
+    "password":"123"
+    
+}
+###
+POST http://localhost:5000/
+Content-Type: application/json
+
+{
+    "email":"nizamgmail.com"
+}
+
+
 
 ###
 POST {{url}}/admin/events
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjIwNzIsImV4cCI6MTYyNjc3Mjg3MiwiaXNzIjoic3RhY2todWJNYXNjIn0.Pj0hiFTwaiqJDV7OwC9O1c7AnHPsevBzlMCJBWjUBkw
 
 {
     "name":"git",
     "totalSeat":20,
     "date":"2021-07-03T14:45",
-    "time":"12:00 PM",
-    "resoursePerson":"nizam"
+    "resoursePerson":"nizam",            
+    "location":"clg av hall",
+    "pic":"hdhdhd"
+}
 
+###
+GET {{url}}/admin/events/60e2ca398191ae0cfa42ba46
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjIwNzIsImV4cCI6MTYyNjc3Mjg3MiwiaXNzIjoic3RhY2todWJNYXNjIn0.Pj0hiFTwaiqJDV7OwC9O1c7AnHPsevBzlMCJBWjUBkw
+
+###
+PUT {{url}}/admin/events
+Content-Type: application/json
+
+{
+    "_id":"60e2c6a9bbd23d0b4c352f8d",
+    "name":"git 1",
+    "totalSeat":20,
+    "date":"2021-07-03T14:45",
+    "time":"12:00 PM",
+    "resoursePerson":"nizam",            
+    "location":"clg av hall",
+    "pic":"hdhdhd"
+
+}
+
+###
+DELETE {{url}}/admin/events
+Content-Type: application/json
+
+{
+     "_id":"60e2c6a9bbd23d0b4c352f8d"
 }
 
 ###
@@ -28,6 +92,20 @@ Content-Type: application/json
 
 ###
 PUT {{url}}/admin/member
+Content-Type: application/json
+
+{
+    "_id":"60e04423dedb1028e3ff7738",
+    "name":"nizam kp",
+    "desc":"ggff",
+    "role":"tech lead"
+
+}
+
+
+
+###
+DELETE {{url}}/admin/member
 Content-Type: application/json
 
 {

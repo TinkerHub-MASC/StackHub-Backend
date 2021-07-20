@@ -1,8 +1,10 @@
 //events model
+const { verifyAdminRefreshToken } = require("../helper/jwt_helper");
 const Events = require("../model/events");
 
 //team model
 const Team = require("../model/team");
+
 module.exports = {
     addingNewEvents: async (req, res) => {
         const { name, totalSeat, date, resoursePerson, meetUrl, pic, location, type } = req.body;
@@ -26,23 +28,23 @@ module.exports = {
         }
 
     },
-getAEvent:async(req,res)=>{
+    getAEvent: async (req, res) => {
         try {
-            const {id} = req.params;
-        const event = await Events.findById(id);
-        if(!event){
-            return res.json({error:"sorry wrong event"})
-        }
-        res.json(event)
+            const { id } = req.params;
+            const event = await Events.findById(id);
+            if (!event) {
+                return res.json({ error: "sorry wrong event" })
+            }
+            res.json(event)
         } catch (err) {
             console.log("error in geting an event data in DB", err);
             res.status(500).json({ error: 'internal server error' })
 
         }
-        
-},
-   
-upadteAEvent: async (req, res) => {
+
+    },
+
+    upadteAEvent: async (req, res) => {
         const {
             _id,
             name,
@@ -132,5 +134,6 @@ upadteAEvent: async (req, res) => {
             console.log('error in deleting user', err);
             res.json.status(500).json("Internal Server Error");
         }
-    }
+    },
+
 }
