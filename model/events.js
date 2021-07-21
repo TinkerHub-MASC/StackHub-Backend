@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const {ObjectId} = mongoose.SchemaTypes;
+
 const eventsSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -33,6 +35,11 @@ const eventsSchema = new mongoose.Schema({
     },
     fee: {
         type: Number
-    }
+    },
+    booked:[{
+        type:ObjectId,
+        ref:'user',
+        uniuqe:true
+    }]
 })
 module.exports = mongoose.model('events', eventsSchema);

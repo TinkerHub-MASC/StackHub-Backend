@@ -1,6 +1,14 @@
 @url = http://localhost:5000
 
 
+###
+PUT {{url}}/user/events/register
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjY4NDU4NjgsImV4cCI6MTYyNjg1MzA2OCwiaXNzIjoic3RhY2todWJNYXNjIn0.2DR52cUiBrzUDa4dgNiiMPjSm9XX0H6B6QCjjsmyvEs
+Content-Type: application/json
+
+{
+    "eventId":"60f7bab2b96a3f1a2fc6e930"
+}
 
 ###
 DELETE  {{url}}/auth/admin/logout
@@ -27,7 +35,7 @@ Content-Type:application/json
 
 {
     "name":"nizam",
-    "email":"nizam1",
+    "email":"nizamniz2k19@gmail.com",
     "password":"123"
 }
 
@@ -37,7 +45,7 @@ Content-Type:application/json
 
 {
     "name":"nizam",
-    "email":"nizam1",
+    "email":"nizamniz2k19@gmail.com",
     "password":"123"
 }
 
@@ -88,7 +96,7 @@ Content-Type: application/json
 ###
 POST {{url}}/admin/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3NjIwNzIsImV4cCI6MTYyNjc3Mjg3MiwiaXNzIjoic3RhY2todWJNYXNjIn0.Pj0hiFTwaiqJDV7OwC9O1c7AnHPsevBzlMCJBWjUBkw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY4NDc5MDYsImV4cCI6MTYyNjg1NTEwNiwiaXNzIjoic3RhY2todWJNYXNjIn0.jWu4kliC_aEggsh0usrJjeOKkv3IyU_HXk_0IRst0rE
 
 {
     "name":"git",
@@ -96,7 +104,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxN
     "date":"2021-07-03T14:45",
     "resoursePerson":"nizam",            
     "location":"clg av hall",
-    "pic":"hdhdhd"
+    "pic":"hdhdhd",
+    "meetUrl":"http://hdhdhd.com",
+    "type":"online"
 }
 
 ###

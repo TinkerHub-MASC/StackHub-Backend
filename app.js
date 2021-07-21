@@ -25,7 +25,7 @@ app.use("/admin",verifyAdminAccessToken,require('./router/adminRouter'));
 
 app.use("/auth",require('./router/authRouter'));
 
-
+app.use("/user",verifyUserAccessToken,require('./router/userRouter'))
 //db
 require('./helper/DB')()
 

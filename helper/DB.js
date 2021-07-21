@@ -7,7 +7,8 @@ try {
         
         useNewUrlParser:true,
         useFindAndModify:false,
-        useUnifiedTopology:true
+        useUnifiedTopology:true,
+        useCreateIndex:true
 
     },()=>console.log('connected to DB'))
 } catch (error) {
