@@ -5,6 +5,10 @@ const Users = require("../model/user");
 
 const mail = require('../helper/mail')
 
+const mongoose = require("mongoose");
+
+
+
 module.exports = {
   bookEvents: async (req, res) => {
     try {
@@ -16,27 +20,67 @@ module.exports = {
       if (!eventId)
         return res.status(503).json({ error: "select A event" })
 
+
+      const userData = await Users.findById(userId, { email: 1, name: 1,_id:0 })
+      const { email, name} = userData;
+
+      
+const Event = await Events.aggregate([
+  {
+    $match:{"_id":mongoose.Types.ObjectId(eventId)}},
+    {
+      $project:{
+        totalSeat:1,bookedSeat:{$size:"$booked"},isBooked:{$in:[mongoose.Types.ObjectId(userId),"$booked"]}}}])
+      
+      
+      
+      /* const Event = await Events.aggregate([
+        {
+          $match:
+            { "_id": mongoose.Types.ObjectId(eventId) }
+        },
+        { $unwind: "$booked" },
+        {
+          $project: {
+            booked: 1,
+            totalSeat:1,
+            alreadyBooked: { $eq: ["$booked", mongoose.Types.ObjectId(userId)] }
+          }
+        }]) */
+
+console.log(Event[0])
+
+      if (Event[0]?Event[0].isBooked:false)
+         return res.json({ error: "User Already Booked This Event" })
+
+      if(Event?Event[0].totalSeat<=Event[0].bookedSeat:false)
+          return res.json({error:"Sorry Seat's Are full"})
+
       const Updated = await Events.findByIdAndUpdate(eventId, {
         $addToSet: { booked: [userId] }
       }, {
         new: true
       })
 
+
+
       // res.json(Updated)
 
-      const userEmail = await Users.findById(userId, { _id: 0, email: 1, name: 1 })
-      
-      const { email, name } = userEmail;
-      
+
+
+
       const text = `👋🏼 Hey ${name} Thanks for Book Our Event ${Updated.name} 
         🤗 Resourse Person :${Updated.resoursePerson}
         📍 Location: ${Updated.location} 📆 Date:${Updated.date} 
         ${Updated.meetUrl ? `Meet Link 🔗${Updated.meetUrl}` : ``}`
-      mail(email, text)
+      mail(email, text);
+
       res.json("Thanks for Register Our Event")
 
     } catch (err) {
+
       console.log(err.message)
+
       res.status(500).json({ error: "Internal Server Error" })
     }
 
