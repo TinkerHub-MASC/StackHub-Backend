@@ -39,7 +39,7 @@ const eventsSchema = new mongoose.Schema({
     booked:[{
         type:ObjectId,
         ref:'user',
-        uniuqe:true
+       
     }]
 })
 module.exports = mongoose.model('events', eventsSchema);
