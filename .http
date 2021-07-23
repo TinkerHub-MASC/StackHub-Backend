@@ -3,11 +3,11 @@
 
 ###
 PUT {{url}}/user/events/register
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YWFmOGEyNGFlNjBiYTVjNTczZGQiLCJpYXQiOjE2MjY5NjM2NDgsImV4cCI6MTYyNjk3MDg0OCwiaXNzIjoic3RhY2todWJNYXNjIn0.wLyKr10VcRBzVBNfW5XfnSr1dk3ZdQA5SkI1e7ZwUxg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjY5NjY1OTMsImV4cCI6MTYyNjk3Mzc5MywiaXNzIjoic3RhY2todWJNYXNjIn0.ushcLHdw8tPMzU9Lf0MbL9GkQEsD7L8QrHjCv4Zkvz8
 Content-Type: application/json
 
 {
-    "eventId":"60f97e8d213fbc0c3121076f"
+    "eventId":"60f9922b6f80920e675dbae4"
 }
 
 ###
@@ -35,7 +35,7 @@ Content-Type:application/json
 
 {
     "name":"nizam",
-    "email":"nizam2",
+    "email":"nizamniz2k19@gmail.com",
     "password":"123"
 }
 
@@ -54,8 +54,8 @@ POST {{url}}/auth/admin/login
 Content-Type:application/json
 
 {
-    "email":"@nizam",
-    "password":"123"
+    "email":"nizamniz2k19@gmail.com",
+    "password":"1234"
 }
 ###
 POST {{url}}/auth/admin/refresh
@@ -79,7 +79,7 @@ POST {{url}}/auth/admin/register
 Content-Type: application/json
 
 {
-    "email":"nizam1",
+    "email":"nizamniz100@gmail.com",
     "password":"123"
     
 }
@@ -100,13 +100,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxN
 
 {
     "name":"git",
-    "totalSeat":1,
+    "totalSeat":2,
     "date":"2021-07-03T14:45",
     "resoursePerson":"nizam",            
     "location":"clg av hall",
     "pic":"hdhdhd",
-    "meetUrl":"http://hdhdhd.com",
-    "type":"online"
+    "type":"offline"
 }
 
 ###

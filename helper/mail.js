@@ -11,7 +11,7 @@ let mailTransporter = NodeMail.createTransport({
 
 
 let mailDetails = {
-        from: '"MASC@Booked.com 👻" <foo@example.com>', // sender address
+        from: "masc@booked.com 👻", // sender address
         to: mail, // list of receivers
         subject: "Thank you for Booking Our Event 👻 ", // Subject line
         text, // plain text body

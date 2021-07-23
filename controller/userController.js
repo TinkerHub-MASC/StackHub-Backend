@@ -21,19 +21,26 @@ module.exports = {
         return res.status(503).json({ error: "select A event" })
 
 
-      const userData = await Users.findById(userId, { email: 1, name: 1,_id:0 })
-      const { email, name} = userData;
+      const userData = await Users.findById(userId, { email: 1, name: 1, _id: 0 })
+      const { email, name } = userData;
 
-      
-const Event = await Events.aggregate([
-  {
-    $match:{"_id":mongoose.Types.ObjectId(eventId)}},
-    {
-      $project:{
-        totalSeat:1,bookedSeat:{$size:"$booked"},isBooked:{$in:[mongoose.Types.ObjectId(userId),"$booked"]}}}])
-      
-      
-      
+
+      const Event = await Events.aggregate([
+        {
+          $match: { "_id": mongoose.Types.ObjectId(eventId) }
+        },
+        {
+          $project: {
+            totalSeat: 1,
+            bookedSeat: { $size: "$booked" },
+            isBooked: {
+              $in: [mongoose.Types.ObjectId(userId), "$booked"]
+            }
+          }
+        }])
+
+
+
       /* const Event = await Events.aggregate([
         {
           $match:
@@ -48,13 +55,13 @@ const Event = await Events.aggregate([
           }
         }]) */
 
-console.log(Event[0])
+      console.log(Event[0])
 
-      if (Event[0]?Event[0].isBooked:false)
-         return res.json({ error: "User Already Booked This Event" })
+      if (Event[0] ? Event[0].isBooked : false)
+        return res.json({ error: "User Already Booked This Event" })
 
-      if(Event?Event[0].totalSeat<=Event[0].bookedSeat:false)
-          return res.json({error:"Sorry Seat's Are full"})
+      if (Event ? Event[0].totalSeat <= Event[0].bookedSeat : false)
+        return res.json({ error: "Sorry Seat's Are full" })
 
       const Updated = await Events.findByIdAndUpdate(eventId, {
         $addToSet: { booked: [userId] }

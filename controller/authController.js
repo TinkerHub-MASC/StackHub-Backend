@@ -9,13 +9,11 @@ const client = require('../helper/redis_init')
 
 const {
     //admin
-    siginAdminAccessToken,
-    siginAdminRefreshToken,
-    verifyAdminRefreshToken,
+    siginAccessToken,
+    siginRefreshToken,
+    verifyRefreshToken,
 
     //user
-    siginUserAccessToken,
-    siginUserRefreshToken,
     verifyUserRefreshToken
 } = require('../helper/jwt_helper')
 
@@ -50,8 +48,11 @@ module.exports = {
             if (!isMatch)
                 return res.status(403).json({ error: "Wrong Username/Password" });
 
-            const accessToken = await siginAdminAccessToken(userFound._id);
-            const refreshToken = await siginAdminRefreshToken(userFound._id);
+            const secret = process.env.Admin_AcessToken_Secret;
+            const refSecret = process.env.Admin_RefreshToken_Secret;
+
+            const accessToken = await siginAccessToken(userFound._id, secret);
+            const refreshToken = await siginRefreshToken(userFound._id, refSecret);
 
 
             res.json({ accessToken, refreshToken });
@@ -106,8 +107,11 @@ module.exports = {
                         password: hashedPassword
                     }).save()
 
-                    const accessToken = await siginAdminAccessToken(newAdmin._id);
-                    const refreshToken = await siginAdminRefreshToken(newAdmin._id);
+                    const secret = process.env.Admin_AcessToken_Secret;
+                    const refSecret = process.env.Admin_RefreshToken_Secret;
+
+                    const accessToken = await siginAccessToken(newAdmin._id, secret);
+                    const refreshToken = await siginRefreshToken(newAdmin._id, refSecret);
 
                     res.json({ accessToken, refreshToken })
 
@@ -136,10 +140,15 @@ module.exports = {
             if (!refreshToken)
                 return res.status(401).json({ error: "ggg" });
 
-            const userId = await verifyAdminRefreshToken(refreshToken)
+            const secret = process.env.Admin_AcessToken_Secret;
+            const refSecret = process.env.Admin_RefreshToken_Secret;
 
-            const accessToken = await siginAdminAccessToken(userId);
-            const refToken = await siginAdminRefreshToken(userId);
+            const userId = await verifyRefreshToken(refreshToken, refSecret)
+
+
+
+            const accessToken = await siginAccessToken(userId, secret);
+            const refToken = await siginRefreshToken(userId, refSecret);
 
             console.log(userId)
 
@@ -158,9 +167,11 @@ module.exports = {
         try {
             const { refershToken } = req.body;
 
+            const refSecret = process.env.Admin_RefreshToken_Secret;
+
             if (!refershToken) return res.status(503).json({ error: "Bad Request" });
 
-            const userId = await verifyAdminRefreshToken(refershToken);
+            const userId = await verifyRefreshToken(refershToken,refSecret);
 
 
             client.DEL(userId, (err, val) => {
@@ -175,7 +186,7 @@ module.exports = {
             })
         } catch (err) {
             console.log(err.message);
-            res.json({error:err.message})
+            res.json({ error: err.message })
         }
     },
 
@@ -221,9 +232,12 @@ module.exports = {
                         password: hashedPassword
 
                     }).save()
+                        
+                    const secret = process.env.User_AcessToken_Secret;
+                    const refSecret = process.env.User_RefreshToken_Secret
 
-                    const accessToken = await siginUserAccessToken(newUser._id);
-                    const refreshToken = await siginUserRefreshToken(newUser._id);
+                    const accessToken = await siginAccessToken(newUser._id,secret);
+                    const refreshToken = await siginRefreshToken(newUser._id,refSecret);
 
                     res.json({ accessToken, refreshToken })
 
@@ -271,8 +285,11 @@ module.exports = {
             if (!isMatch)
                 return res.status(403).json({ error: "Wrong Username/Password" });
 
-            const accessToken = await siginUserAccessToken(userFound._id);
-            const refreshToken = await siginUserRefreshToken(userFound._id);
+                const secret = process.env.User_AcessToken_Secret;
+                const refSecret = process.env.User_RefreshToken_Secret
+
+                const accessToken = await siginAccessToken(userFound._id,secret);
+                const refreshToken = await siginRefreshToken(userFound._id,refSecret);
 
 
             res.json({ accessToken, refreshToken });
@@ -292,12 +309,15 @@ module.exports = {
             const { refreshToken } = req.body;
 
             if (!refreshToken)
-                return res.status(401).json({ error: "ggg" });
+                return res.status(401).json({ error: "Un Authrized User" });
 
-            const userId = await verifyUserRefreshToken(refreshToken)
+                const refSecret = process.env.User_RefreshToken_Secret;
+                const secret = process.env.User_AcessToken_Secret;
 
-            const accessToken = await siginUserAccessToken(userId);
-            const refToken = await siginUserRefreshToken(userId);
+            const userId = await verifyRefreshToken(refreshToken,refSecret)
+
+            const accessToken = await siginAccessToken(userId,secret);
+            const refToken = await siginRefreshToken(userId,refSecret);
 
             console.log(userId)
 
@@ -318,7 +338,8 @@ module.exports = {
 
             if (!refershToken) return res.status(503).json({ error: "Bad Request" });
 
-            const userId = await verifyUserRefreshToken(refershToken);
+            const refSecret = process.env.User_RefreshToken_Secret;
+            const userId = await verifyRefreshToken(refershToken,refSecret);
 
 
             client.DEL(userId, (err, val) => {
@@ -333,7 +354,7 @@ module.exports = {
             })
         } catch (err) {
             console.log(err.message);
-            res.json({error:err.message})
+            res.json({ error: err.message })
         }
     }
 
