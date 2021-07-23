@@ -33,6 +33,15 @@ router.post("/user/login",registerValidator,Auth.userLogin);
 //@route post /auth/admin/login
 router.post("/user/refresh",Auth.userrefreshToken);
 
+//@desc user verify email
+//@route get /auth/user/verify-email/:token
+router.get("/user/verify-email/:token",Auth.verifyEmail)
+
+//@desc user login
+//@route post /auth/admin/login
+router.post("/user/resend-verfiy-email",Auth.resendVerificationMail);
+
+
 //@desc user logout
 //@route post /auth/admin/logout
 router.delete("/user/logout",Auth.userLogout);

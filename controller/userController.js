@@ -41,19 +41,7 @@ module.exports = {
 
 
 
-      /* const Event = await Events.aggregate([
-        {
-          $match:
-            { "_id": mongoose.Types.ObjectId(eventId) }
-        },
-        { $unwind: "$booked" },
-        {
-          $project: {
-            booked: 1,
-            totalSeat:1,
-            alreadyBooked: { $eq: ["$booked", mongoose.Types.ObjectId(userId)] }
-          }
-        }]) */
+  
 
       console.log(Event[0])
 

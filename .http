@@ -3,19 +3,30 @@
 
 ###
 PUT {{url}}/user/events/register
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjY5NjY1OTMsImV4cCI6MTYyNjk3Mzc5MywiaXNzIjoic3RhY2todWJNYXNjIn0.ushcLHdw8tPMzU9Lf0MbL9GkQEsD7L8QrHjCv4Zkvz8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjcwMzk0MjMsImV4cCI6MTYyNzA0NjYyMywiaXNzIjoic3RhY2todWJNYXNjIn0.DBuUJYYpr3gkTxDwHGGwqM-U0htZQZ9K6QTSa4DoTT0
 Content-Type: application/json
 
 {
-    "eventId":"60f9922b6f80920e675dbae4"
+    "eventId":"60faa7c66ab5eb14fe9dd7c6"
 }
+
+###
+POST {{url}}/auth/user/resend-verfiy-email
+Content-Type: application/json
+
+{
+    "email":"@nizam"
+}
+
+###
+GET http://localhost:5000/auth/user/verify-email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGZhYjNmYzU5ZDQxODFiOTIyODRjNWUiLCJpYXQiOjE2MjcwNTE5NDcsImV4cCI6MTYyNzA1OTE0NywiaXNzIjoic3RhY2todWJNYXNjIn0.A04Stbba31_lHsUyyRmz8Ft13aVMilI6USuR1RXRNd0
 
 ###
 DELETE  {{url}}/auth/admin/logout
 Content-Type: application/json
 
 {
-    "refershToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWVkYTAwZGE5NzI4ZDdjMzBjODEiLCJpYXQiOjE2MjY3NzkzNTQsImV4cCI6MTYyOTM3MTM1NCwiaXNzIjoic3RhY2todWJNYXNjIn0.92_HkUJxGr0lllHW372thvrpLEptSUHLPLGEPkXGcu0"
+    "refershToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjcwMzcwMjcsImV4cCI6MTYyOTYyOTAyNywiaXNzIjoic3RhY2todWJNYXNjIn0.KQ7LHD2LHnGe6wVE_07YZ6Y3mQyi2wyPFL48Jo1NyFI"
 }
 
 ###
@@ -23,7 +34,7 @@ DELETE  {{url}}/auth/user/logout
 Content-Type: application/json
 
 {
-    "refershToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWViYjAwZGE5NzI4ZDdjMzBjN2QiLCJpYXQiOjE2MjY3ODI2NDUsImV4cCI6MTYyOTM3NDY0NSwiaXNzIjoic3RhY2todWJNYXNjIn0.DClNXA_T7KD6IrTKC3XEPc6i82JIAG1_M5axSdKv8Co"
+    "refershToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjcwMzkxOTUsImV4cCI6MTYyOTYzMTE5NSwiaXNzIjoic3RhY2todWJNYXNjIn0.tOLx5GNMGfsre1JI8rEUvuQRrfwJLTe48UcTA5OHGbs"
 }
 ###
 GET {{url}}
@@ -45,7 +56,7 @@ Content-Type:application/json
 
 {
     "name":"nizam",
-    "email":"nizamniz2k19@gmail.com",
+    "email":"nizam3",
     "password":"123"
 }
 
@@ -54,15 +65,15 @@ POST {{url}}/auth/admin/login
 Content-Type:application/json
 
 {
-    "email":"nizamniz2k19@gmail.com",
-    "password":"1234"
+    "email":"@nizam",
+    "password":"123"
 }
 ###
 POST {{url}}/auth/admin/refresh
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY3Nzg1MDgsImV4cCI6MTYyOTM3MDUwOCwiaXNzIjoic3RhY2todWJNYXNjIn0.VFvohZYMJaFJdL6Z2U2BpJAdqY2LZdzOXHgw3zUOvlU"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjcwMzcyNzIsImV4cCI6MTYyOTYyOTI3MiwiaXNzIjoic3RhY2todWJNYXNjIn0.fieup73jzsRUKxWD8F9du280xluzlR8de0SC7WOqPp0"
 }
 
 ###
@@ -70,7 +81,7 @@ POST {{url}}/auth/user/refresh
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2YWViYjAwZGE5NzI4ZDdjMzBjN2QiLCJpYXQiOjE2MjY3ODA2MjUsImV4cCI6MTYyOTM3MjYyNSwiaXNzIjoic3RhY2todWJNYXNjIn0.hDZ4I-TUOQFTzSnZ8uZBnE_ImnbFOQaF8ucd3ZrvjEA"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjcwMzg0OTQsImV4cCI6MTYyOTYzMDQ5NCwiaXNzIjoic3RhY2todWJNYXNjIn0.DwMgqBHLU3EmINi1VCVKQEbPLy1WumZzYuMlk8DzNKc"
 }
 
 
@@ -79,7 +90,7 @@ POST {{url}}/auth/admin/register
 Content-Type: application/json
 
 {
-    "email":"nizamniz100@gmail.com",
+    "email":"nizamniz1001@gmail.com",
     "password":"123"
     
 }
@@ -96,7 +107,7 @@ Content-Type: application/json
 ###
 POST {{url}}/admin/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjY5NjM1NjEsImV4cCI6MTYyNjk3MDc2MSwiaXNzIjoic3RhY2todWJNYXNjIn0.Vy11v9DtdSwF0CfFiUXUH4Ew2Yz9sLiNGpNmI_Tw6_g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjcwMzk2NjMsImV4cCI6MTYyNzA0Njg2MywiaXNzIjoic3RhY2todWJNYXNjIn0.bGz4wQYiy0VhPAfkioX1bIlO3AMBC8fr2NQIFDecgjs
 
 {
     "name":"git",

@@ -139,9 +139,32 @@ module.exports = {
 
     },
 
+
+    verifyEmailToken: (mailToken) => {
+
+        const secret =process.env.Verfiy_Email_Secret
+
+        return new Promise((resolve, reject) => {
+
+
+            jwt.verify(mailToken, secret, (err, payload) => {
+
+                if (err) {
+
+                    console.log(err.message);
+                    reject({ message: 'Link Expired', code: 401 });
+
+                }
+                const userId = payload.aud;
+                resolve(userId)
+
+
+            })
+        })
+
+    },
+
     //user
-
-
 
     verifyUserAccessToken: (req, res, next) => {
 
@@ -175,6 +198,8 @@ module.exports = {
 
 
     },
+
+
 
 
 }
