@@ -68,7 +68,12 @@ module.exports = {
         🤗 Resourse Person :${Updated.resoursePerson}
         📍 Location: ${Updated.location} 📆 Date:${Updated.date} 
         ${Updated.meetUrl ? `Meet Link 🔗${Updated.meetUrl}` : ``}`
-      mail(email, text);
+
+      const subject = 'Thanks for Booking Our Event 👻'
+      
+      const html = `<h3>${text}</h3>`
+
+      mail(email,subject,text,html);
 
       res.json("Thanks for Register Our Event")
 

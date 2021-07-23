@@ -5,7 +5,9 @@ const Admin = require('../model/admin');
 
 const User = require("../model/user");
 
-const client = require('../helper/redis_init')
+const client = require('../helper/redis_init');
+
+const Mail = require("../helper/mail")
 
 const {
     siginAccessToken,
@@ -239,6 +241,20 @@ module.exports = {
                     const verfiyEmailLink = `http://localhost:5000/auth/user/verify-email/${Token}`
                     //const refreshToken = await siginRefreshToken(newUser._id,refSecret);
                     console.log(verfiyEmailLink)
+
+                    const Useremail = newUser.email;
+
+                    const subject = 'Verfication Email';
+                    
+                    const text = `${verfiyEmailLink}`
+
+                    const html = `<h3>Verfiy Your Email 🤗</h3>
+                        <a href=${verfiyEmailLink}><button>click this Button for verify your Email</button></a>
+                    `
+
+
+
+                    Mail(Useremail,subject,text,html)
                     res.json('Hey we send verification mail to your registerd email')
                     
 

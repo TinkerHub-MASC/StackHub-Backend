@@ -1,6 +1,6 @@
 
 const NodeMail = require('nodemailer');
-const Gmail = (mail,text,subject)=>{
+const Gmail = (mail,subject,text,html)=>{
 let mailTransporter = NodeMail.createTransport({
     service:'gmail',
     auth:{
@@ -11,11 +11,11 @@ let mailTransporter = NodeMail.createTransport({
 
 
 let mailDetails = {
-        from: "masc@booked.com 👻", // sender address
+        from: '"masc@stackhub.com 👻"masc@stackhub.com', // sender address
         to: mail, // list of receivers
-        subject: "Thank you for Booking Our Event 👻 ", // Subject line
-        text, // plain text body
-        html: `<h3>${text}</h3>`, // html body
+        subject, // Subject line
+        text,   // plain text body
+        html, // html body
 
 
 };
