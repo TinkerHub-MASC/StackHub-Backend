@@ -354,6 +354,7 @@ module.exports = {
 
                 return res.json({ error: error })
             }
+
             const userFound = await User.findOne({ email });
 
             if (!userFound)
@@ -363,6 +364,9 @@ module.exports = {
 
             if (!isMatch)
                 return res.status(403).json({ error: "Wrong Username/Password" });
+
+            if(!userFound.isVerfiyed)
+                return res.status(403).json({error:"User Didn't verify the email"})
 
             const secret = process.env.User_AcessToken_Secret;
             const refSecret = process.env.User_RefreshToken_Secret
