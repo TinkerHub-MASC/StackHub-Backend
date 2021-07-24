@@ -23,6 +23,8 @@ app.get("/",verifyUserAccessToken,(req,res)=>{
 //router
 app.use("/admin",verifyAdminAccessToken,require('./router/adminRouter'));
 
+app.use("/all",require('./router/allRouter'));
+
 app.use("/auth",require('./router/authRouter'));
 
 app.use("/user",verifyUserAccessToken,require('./router/userRouter'))

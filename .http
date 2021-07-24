@@ -1,6 +1,6 @@
 @url = http://localhost:5000
 
-
+GET {{url}}/all/team
 
 ###
 PUT http://localhost:5000/auth/user/forgotpassword/60fae6447b457331227001c4/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGZhZTY0NDdiNDU3MzMxMjI3MDAxYzQiLCJpYXQiOjE2MjcxMjM3MDcsImV4cCI6MTYyNzEzMDkwNywiaXNzIjoic3RhY2todWJNYXNjIn0.72G3xgCoBeEwKFoLsDITbHme8A5X1A8zF-P-Ie1UrHY
@@ -86,7 +86,7 @@ POST {{url}}/auth/admin/login
 Content-Type:application/json
 
 {
-    "email":"nizamniz2k19@gmaiil.com",
+    "email":"nizamniz1001@gmaiil.com",
     "password":"1234"
 }
 ###
@@ -111,7 +111,7 @@ POST {{url}}/auth/admin/register
 Content-Type: application/json
 
 {
-    "email":"nizamniz1001@gmail.com",
+    "email":"nizamniz100@gmail.com",
     "password":"123"
     
 }
@@ -128,12 +128,12 @@ Content-Type: application/json
 ###
 POST {{url}}/admin/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY2NjYxNjZiNTMxMzBhNTBiYzEwMDIiLCJpYXQiOjE2MjcwMzk2NjMsImV4cCI6MTYyNzA0Njg2MywiaXNzIjoic3RhY2todWJNYXNjIn0.bGz4wQYiy0VhPAfkioX1bIlO3AMBC8fr2NQIFDecgjs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGZiZjk3ZWRjMWM3ZjIwOWE1MjAzM2IiLCJpYXQiOjE2MjcxMjYxNDIsImV4cCI6MTYyNzEzMzM0MiwiaXNzIjoic3RhY2todWJNYXNjIn0.1Yt6w5zUvgHeJXpVPCchwM4rRuIB8J2SnouszRsztXI
 
 {
     "name":"git",
     "totalSeat":2,
-    "date":"2021-07-03T14:45",
+    "date":"2021-07-25T11:23:10.546Z",
     "resoursePerson":"nizam",            
     "location":"clg av hall",
     "pic":"hdhdhd",
