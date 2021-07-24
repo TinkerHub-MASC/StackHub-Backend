@@ -199,7 +199,30 @@ module.exports = {
 
     },
 
+    
+    verifyPasswordToken: (passwordToken,secret) => {
 
+        // const secret =process.env.Verfiy_Email_Secret
+
+        return new Promise((resolve, reject) => {
+
+
+            jwt.verify(passwordToken, secret, (err, payload) => {
+
+                if (err) {
+
+                    console.log(err.message);
+                    reject({ message: 'Link Expired', code: 401 });
+
+                }
+                const userId = payload.aud;
+                resolve(userId)
+
+
+            })
+        })
+
+    },
 
 
 }

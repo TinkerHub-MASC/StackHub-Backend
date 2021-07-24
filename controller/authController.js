@@ -13,7 +13,8 @@ const {
     siginAccessToken,
     siginRefreshToken,
     verifyRefreshToken,
-    verifyEmailToken
+    verifyEmailToken,
+    verifyPasswordToken
 } = require('../helper/jwt_helper')
 
 const bcrypt = require('bcrypt');
@@ -237,6 +238,7 @@ module.exports = {
                     const secret = process.env.Verfiy_Email_Secret;
                     //const refSecret = process.env.User_RefreshToken_Secret
 
+                    //add your frontend url
                     const Token = await siginAccessToken(newUser._id, secret);
                     const verfiyEmailLink = `http://localhost:5000/auth/user/verify-email/${Token}`
                     //const refreshToken = await siginRefreshToken(newUser._id,refSecret);
@@ -245,7 +247,7 @@ module.exports = {
                     const Useremail = newUser.email;
 
                     const subject = 'Verfication Email';
-                    
+
                     const text = `${verfiyEmailLink}`
 
                     const html = `<h3>Verfiy Your Email 🤗</h3>
@@ -254,9 +256,9 @@ module.exports = {
 
 
 
-                    Mail(Useremail,subject,text,html)
+                    Mail(Useremail, subject, text, html)
                     res.json('Hey we send verification mail to your registerd email')
-                    
+
 
                     if (err) {
                         console.log(err.message);
@@ -282,13 +284,16 @@ module.exports = {
 
             const userId = await verifyEmailToken(token);
 
+            if (!userId)
+                return res.json({ error: "Link expied" })
+
             const alreadyVerifyedUser = await User.findById(userId);
 
-            if(alreadyVerifyedUser.isVerfiyed)
-                return res.json({error:"User Already Verifyed"});
+            if (alreadyVerifyedUser.isVerfiyed)
+                return res.json({ error: "User Already Verifyed" });
 
             const verfiyedUser = await User.findByIdAndUpdate(userId, {
-              
+
                 isVerfiyed: true
             })
 
@@ -297,7 +302,7 @@ module.exports = {
         } catch (err) {
 
             console.error(err.message)
-            return res.status(401).json({ error:err.message })
+            return res.status(401).json({ error: err.message })
 
         }
 
@@ -305,37 +310,51 @@ module.exports = {
 
     },
 
-    resendVerificationMail:async(req,res)=>{
+    resendVerificationMail: async (req, res) => {
         try {
-             const {email} = req.body;
-            
-            if(!email)
-                return res.status(404).json({error:"Please Enter Valid Email"});
+            const { email } = req.body;
 
-            const userData = await User.findOne({email},{_id:1,name:1,isVerfiyed:1});
+            if (!email)
+                return res.status(404).json({ error: "Please Enter Valid Email" });
 
-            if(!userData)
-                return res.json({error:"User Not Registerd"})
-            
+            const userData = await User.findOne({ email }, { _id: 1, name: 1, isVerfiyed: 1 });
+
+            if (!userData)
+                return res.json({ error: "User Not Registerd" })
+
             console.log(userData)
 
-            if(userData.isVerfiyed)
-                 return res.json({error:"User Already Verifyed"})
+            if (userData.isVerfiyed)
+                return res.json({ error: "User Already Verifyed" })
 
             const secret = process.env.Verfiy_Email_Secret;
 
+            //add your frontend url
             const Token = await siginAccessToken(userData._id, secret);
             const verfiyEmailLink = `http://localhost:5000/auth/user/verify-email/${Token}`
+
+
+            const subject = 'Verfication Email';
+
+            const text = `${verfiyEmailLink}`
+
+            const html = `<h3>Verfiy Your Email 🤗</h3>
+                <a href=${verfiyEmailLink}><button>click this Button for verify your Email</button></a>
+            `
+
+
+
+            Mail(email, subject, text, html)
 
             //const refreshToken = await siginRefreshToken(newUser._id,refSecret);
             console.log(verfiyEmailLink)
             res.json(`Hey ${userData.name} we send verification mail to your registerd email`)
-            
+
         } catch (err) {
             console.log(err.message)
         }
 
-           
+
 
     },
 
@@ -365,8 +384,8 @@ module.exports = {
             if (!isMatch)
                 return res.status(403).json({ error: "Wrong Username/Password" });
 
-            if(!userFound.isVerfiyed)
-                return res.status(403).json({error:"User Didn't verify the email"})
+            if (!userFound.isVerfiyed)
+                return res.status(403).json({ error: "User Didn't verify the email" })
 
             const secret = process.env.User_AcessToken_Secret;
             const refSecret = process.env.User_RefreshToken_Secret
@@ -439,7 +458,110 @@ module.exports = {
             console.log(err.message);
             res.json({ error: err.message })
         }
+    },
+
+    userForgotPassword: async (req, res) => {
+        try {
+            const { email } = req.body;
+
+            if (!email)
+                return res.status(404).json({ error: "Please Enter Your Email" });
+
+            const userData = await User.findOne({ email })
+
+            if (!userData)
+                return res.status(403).json({ error: "Invalid Email" })
+
+            const secret = process.env.Forgot_Password_Secret + userData.password;
+
+            const token = await siginAccessToken(userData._id, secret)
+
+            const url = `http://localhost:5000/auth/user/forgotpassword/${userData._id}/${token}`
+
+            //mail
+
+                    const subject = 'Reset Your  Password';
+
+                    const text = `click this link for rest your password ${url}`
+
+                    const html = `<h3>Change Your Password 🤗</h3>
+                        <a href=${url}><button>click this Button for Reset Password</button></a>
+                    `
+
+
+
+                    Mail(email, subject, text, html)
+                    res.json(`Hey ${userData.name} we send Rest Password Link  to your registerd email It will Expired in 2 hour`)
+            console.log(url)
+        } catch (err) {
+
+            console.error(err.message);
+            res.status(500).json({ error: "Internal Server Error" })
+
+        }
+
+
+
+    },
+
+    userChangePassword: async (req, res) => {
+
+        try {
+            const { id, token } = req.params;
+
+            const userData = await User.findById(id)
+
+            if (!userData)
+                return res.json({ error: "Wrong User" })
+
+            const secret = process.env.Forgot_Password_Secret + userData.password;
+
+            const userId = await verifyPasswordToken(token, secret)
+
+            const { password, password2 } = req.body;
+
+            if (!password || password !== password2)
+                return res.json({ error: "Enter valid Password" })
+
+            const saltRound = 10;
+            
+            bcrypt.genSalt(saltRound, (err, salt) => {
+                    console.log(salt)
+                if (err) {
+                    console.error("gen salt", err.message);
+                    return res.status(500).json({ error: "Internal Server Error" })
+                }
+
+                bcrypt.hash(password,salt, async (err, hashedPassword) => {
+
+                    if (err) {
+                        console.error(err)
+                        return res.status(500).json({ error: "Internal Server Error" })
+                    }
+
+                    const updateUserPassword = await User.findByIdAndUpdate(userId, {
+                        password: hashedPassword
+
+                    })
+
+                    res.json('Sucessfuly Updated Password')
+                })
+
+
+            })
+
+
+        } catch (err) {
+
+            console.error(err.message)
+            return res.json({ error: err.message })
+
+        }
+
+
     }
+
+
 
 
 }

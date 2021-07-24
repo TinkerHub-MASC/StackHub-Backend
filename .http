@@ -1,6 +1,27 @@
 @url = http://localhost:5000
 
 
+
+###
+PUT http://localhost:5000/auth/user/forgotpassword/60fae6447b457331227001c4/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGZhZTY0NDdiNDU3MzMxMjI3MDAxYzQiLCJpYXQiOjE2MjcxMjM3MDcsImV4cCI6MTYyNzEzMDkwNywiaXNzIjoic3RhY2todWJNYXNjIn0.72G3xgCoBeEwKFoLsDITbHme8A5X1A8zF-P-Ie1UrHY
+Content-Type: application/json
+
+{
+    "password":"nizam",
+    "password2":"nizam"
+
+}
+
+
+###
+POST {{url}}/auth/user/forgotpassword
+Content-Type: application/json
+
+{
+    "email":"nizamniz2k19@gmail.com"
+
+}
+
 ###
 PUT {{url}}/user/events/register
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGY3YjJhYzg5ODdjODEzMTI2YWQ0YTUiLCJpYXQiOjE2MjcwMzk0MjMsImV4cCI6MTYyNzA0NjYyMywiaXNzIjoic3RhY2todWJNYXNjIn0.DBuUJYYpr3gkTxDwHGGwqM-U0htZQZ9K6QTSa4DoTT0
@@ -15,7 +36,7 @@ POST {{url}}/auth/user/resend-verfiy-email
 Content-Type: application/json
 
 {
-    "email":"@nizam"
+    "email":"nizamniz2k19@gmail.com"
 }
 
 ###
@@ -47,7 +68,7 @@ Content-Type:application/json
 {
     "name":"nizam",
     "email":"nizamniz2k19@gmail.com",
-    "password":"123"
+    "password":"nizam"
 }
 
 ###
@@ -65,8 +86,8 @@ POST {{url}}/auth/admin/login
 Content-Type:application/json
 
 {
-    "email":"@nizam",
-    "password":"123"
+    "email":"nizamniz2k19@gmaiil.com",
+    "password":"1234"
 }
 ###
 POST {{url}}/auth/admin/refresh

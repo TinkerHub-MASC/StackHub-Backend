@@ -37,8 +37,8 @@ router.post("/user/refresh",Auth.userrefreshToken);
 //@route get /auth/user/verify-email/:token
 router.get("/user/verify-email/:token",Auth.verifyEmail)
 
-//@desc user login
-//@route post /auth/admin/login
+//@desc user resend verification mail
+//@route post /auth/user/resend-verfiy-email
 router.post("/user/resend-verfiy-email",Auth.resendVerificationMail);
 
 
@@ -46,8 +46,12 @@ router.post("/user/resend-verfiy-email",Auth.resendVerificationMail);
 //@route post /auth/admin/logout
 router.delete("/user/logout",Auth.userLogout);
 
+//@desc user forgot password
+//@route post /auth/user/forgotpassword
+router.post("/user/forgotpassword",Auth.userForgotPassword);
 
-
-
+//@desc user forgot password
+//@route post /auth/user/forgotpassword
+router.put("/user/forgotpassword/:id/:token",Auth.userChangePassword);
 
 module.exports = router;
