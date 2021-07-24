@@ -1,6 +1,8 @@
 @url = http://localhost:5000
 
 GET {{url}}/all/team
+###
+GET {{url}}/all/pre-event
 
 ###
 PUT http://localhost:5000/auth/user/forgotpassword/60fae6447b457331227001c4/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI2MGZhZTY0NDdiNDU3MzMxMjI3MDAxYzQiLCJpYXQiOjE2MjcxMjM3MDcsImV4cCI6MTYyNzEzMDkwNywiaXNzIjoic3RhY2todWJNYXNjIn0.72G3xgCoBeEwKFoLsDITbHme8A5X1A8zF-P-Ie1UrHY

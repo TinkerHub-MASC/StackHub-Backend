@@ -5,19 +5,74 @@ module.exports = {
 
     ShowCaseOurTeam: async (req, res) => {
 
-        const AllPersonsInTeam = await Teams.find();
+        try {
+            const AllPersonsInTeam = await Teams.find();
 
-        res.json(AllPersonsInTeam)
+            res.json(AllPersonsInTeam)
+        } catch (err) {
+
+            console.error(err.message);
+            return res.status(500).json({ error: "Internal Server Error" });
+
+        }
+
+
 
     },
 
     ourEvents: async (req, res) => {
+        try {
+            const upcomingEvent = await Events.aggregate([
+                {
+                    $addFields: { isNotOver: { $gte: ["$date", new Date()] } }
+                },
+                { $match: { "isNotOver": true } },
+                {
+                    $project:
+                    {
+                        name: 1,
+                        type: 1,
+                        location: 1,
+                        totalSeat: 1,
+                        pic: 1,
+                        resoursePerson: 1,
+                        fee: 1,
 
-        const upcomingEvent = await Events.aggregate([
+                        year: { $year: "$date" },
+
+                        month: { $month: "$date" },
+
+                        day: { $dayOfMonth: "$date" },
+
+                        hour: { $hour: "$date" },
+
+                        minute: { $minute: "$date" },
+
+                        availableSeat: { $subtract: ["$totalSeat", { $size: "$booked" }] }
+
+
+                    }
+                }
+            ])
+
+            res.json(upcomingEvent)
+        } catch (err) {
+
+            console.error(err.message);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+
+
+
+    },
+
+    previousEvent: async(req,res)=>{
+        
+        const previousEvent = await Events.aggregate([
             {
-                $addFields: { isNotOver: { $gte: ["$date", new Date()] } }
+                $addFields: { isOver: { $lt: ["$date", new Date()] } }
             },
-            { $match: { "isNotOver": true } },
+            { $match: { "isOver": true } },
             {
                 $project:
                 {
@@ -27,7 +82,7 @@ module.exports = {
                     totalSeat: 1,
                     pic: 1,
                     resoursePerson: 1,
-                    fee:1,
+                    fee: 1,
 
                     year: { $year: "$date" },
 
@@ -35,29 +90,17 @@ module.exports = {
 
                     day: { $dayOfMonth: "$date" },
 
-                    hour:{$hour:"$date"},
+                    hour: { $hour: "$date" },
 
-                    minute:{$minute:"$date"},
+                    minute: { $minute: "$date" },
 
-                    
-
-
+                    particepant: {    $size: "$booked"  }
 
 
                 }
             }
         ])
 
-        res.json(upcomingEvent)
-        /*  db.events.aggregate([{
-             $addFields: { ff: { $gte: ["$date", new Date()] } }
-         },
-         { $match: { "ff": true } },
-         {
-             $project: {
-                 year: { $year: "$date" },
-                 location: 1
-             }
-         }]) */
+        res.json(previousEvent)
     }
 }
