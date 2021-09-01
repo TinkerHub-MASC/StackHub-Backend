@@ -8,7 +8,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nizam Kolathoden",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
