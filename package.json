@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Nizam Kolathoden",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
